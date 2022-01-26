@@ -1,2 +1,2 @@
 # Duality
-GGK 2022
+GGJ 2022
