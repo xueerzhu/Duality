@@ -113,7 +113,7 @@ public class Main : MonoBehaviour
         
         while (time < 0.6f)
         {
-            viewTransform.eulerAngles = EaseOut(time / 0.5f) * (new Vector3(360*1,0,0) + endValue);
+            viewTransform.eulerAngles = Game.EaseOut(time / 0.5f) * (new Vector3(360*1,0,0) + endValue);
             // viewTransform.eulerAngles = (new Vector3(360*1,0,0) + endValue) * flipCurve.Evaluate(time / 0.5f);
             time += Time.deltaTime;
             yield return null;
@@ -138,26 +138,4 @@ public class Main : MonoBehaviour
         }
         isRotating = false;
     }
-    
-    // ANIMATION
-    public static float EaseOut(float t)
-    {
-        return Flip(Flip(t) * Flip(t) * Flip(t) * Flip(t));
-    }
-    
-    public static float EaseIn(float t)
-    {
-        return Flip(t) * Flip(t) * Flip(t) * Flip(t);
-    }
-    
-    public static float EaseInOut(float t)
-    {
-        return Mathf.Lerp(EaseIn(t), EaseOut(t), t);
-    }
-
-    static float Flip(float x)
-    {
-        return 1 - x;
-    }
-    
 }

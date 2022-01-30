@@ -38,5 +38,25 @@ public static class Game
     }
     
     
+    // ANIMATION
+    public static float EaseOut(float t)
+    {
+        return Flip(Flip(t) * Flip(t) * Flip(t) * Flip(t));
+    }
     
+    public static float EaseIn(float t)
+    {
+        return Flip(t) * Flip(t) * Flip(t) * Flip(t);
+    }
+    
+    public static float EaseInOut(float t)
+    {
+        return Mathf.Lerp(EaseIn(t), EaseOut(t), t);
+    }
+
+    static float Flip(float x)
+    {
+        return 1 - x;
+    }
+
 }
