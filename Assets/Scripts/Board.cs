@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
+using UnityEngine.Tilemaps;
 using UnityEngine.UIElements;
 
 public class Board : MonoBehaviour
@@ -68,22 +69,15 @@ public class Board : MonoBehaviour
         board[stonePosition].AppendTile(Game.Tile.STONE);
         
         // 3. squares with water
-        float rotate;
-        bool isEdge;
+        Game.Tile riverTile;
         if (windDirection == Game.WindDir.X)
         {
             for (int x = 0 - xHalf; x <  0 - xHalf + startBoardSizeX; x++)
             {
                 Vector3Int r = new Vector3Int(x, cloudPosition.y, cloudPosition.z);
-                getRiverEdge(r, windDirection, out rotate, out isEdge);
-                if (isEdge)
-                {
-                    board[r].AppendTile(Game.Tile.RIVER_EDGE);
-                }
-                else
-                {
-                    board[r].AppendTile(Game.Tile.RIVER_STRAIGHT);
-                }
+                getRiverTile(r, windDirection, out riverTile);
+                board[r].AppendTile(riverTile);
+
             }
         }
         else
@@ -91,16 +85,8 @@ public class Board : MonoBehaviour
             for (int z = 0 - zHalf; z < 0 - zHalf + startBoardSizeZ; z++)
             {
                 Vector3Int r = new Vector3Int(cloudPosition.x, cloudPosition.y, z);
-                getRiverEdge(r, windDirection, out rotate, out isEdge);
-                if (isEdge)
-                {
-                    board[r].AppendTile(Game.Tile.RIVER_EDGE);
-                }
-                else
-                {
-                    board[r].AppendTile(Game.Tile.RIVER_STRAIGHT);
-                }
-                
+                getRiverTile(r, windDirection, out riverTile);
+                board[r].AppendTile(riverTile);
             }
         }
     }
@@ -150,9 +136,9 @@ public class Board : MonoBehaviour
         isDirty = true;
     }
 
-    private void getRiverEdge(Vector3Int square, Game.WindDir wind, out float rotateAngle, out bool isEdge)
+    private void getRiverTile(Vector3Int square, Game.WindDir wind, out Game.Tile river)
     {
-        isEdge = false;
+        bool isEdge = false;
         
         int xHalf = (int) Math.Round(Decimal.ToDouble(startBoardSizeX) / 2);
         int zHalf = (int) Math.Round(Decimal.ToDouble(startBoardSizeZ) / 2);
@@ -161,28 +147,32 @@ public class Board : MonoBehaviour
         {
             if (square.x == 0 - xHalf)
             {
-                rotateAngle = 180;
-                isEdge = true;
+                river = Game.Tile.RIVER_EG_NX;
             }
             else if (square.x == 0 - xHalf + startBoardSizeX - 1)
             {
-                isEdge = true;
+                river = Game.Tile.RIVER_EG_PX;
+            }
+            else
+            {
+                river = Game.Tile.RIVER_ST_NX;
             }
         }
         else
         {
             if (square.z == 0 - zHalf)
             {
-                rotateAngle = 90;
-                isEdge = true;
+                river = Game.Tile.RIVER_EG_NZ;
             }
             else if (square.z == 0 - zHalf + startBoardSizeZ - 1)
             {
-                isEdge = true;
-                rotateAngle = 270;
+                river = Game.Tile.RIVER_EG_PZ;
+            }
+            else
+            {
+                river = Game.Tile.RIVER_ST_NZ;
             }
         }
-        rotateAngle = 0;
     }
 }
 

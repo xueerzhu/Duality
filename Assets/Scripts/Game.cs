@@ -14,11 +14,17 @@ public static class Game
     public enum Tile
     {
         GROUND,
-        RIVER_90,
-        RIVER_EDGE,
-        RIVER_STRAIGHT,
+        CLOUD,
         STONE,
-        CLOUD
+        RIVER_ST_NX,
+        RIVER_ST_PX,
+        RIVER_ST_NZ,
+        RIVER_ST_PZ,
+        RIVER_EG_NX,
+        RIVER_EG_PX,
+        RIVER_EG_NZ,
+        RIVER_EG_PZ
+
     };
     
     public enum WindDir
