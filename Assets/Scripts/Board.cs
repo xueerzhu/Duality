@@ -123,6 +123,18 @@ public class Board : MonoBehaviour
                 {
                     rocks[loc] = Instantiate(tilePrefabs[(int)tile], locc, Quaternion.identity);
                 }
+                else if (tile.ToString().Split('_')[0] == "GROUND")
+                {
+                    int r = Random.Range(0, 100);
+                    if (r % 2 == 0)
+                    {
+                        Instantiate(tilePrefabs[(int)tile], locc, Quaternion.Euler(0, r % 3 * 90, 180));
+                    }
+                    else if (r % 2 == 1)
+                    {
+                        Instantiate(tilePrefabs[(int)tile], locc, Quaternion.Euler(0, r % 3 * 90, 0));
+                    }
+                }
                 else
                 {
                     Instantiate(tilePrefabs[(int)tile], locc, Quaternion.identity);

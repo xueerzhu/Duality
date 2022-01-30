@@ -10,7 +10,8 @@ public static class Game
         BETA
     };
     
-    // TODO: EDITOR DEPENDENCY KEEP THIS UPDATED
+    // EDITOR DEPENDENCY KEEP THIS UPDATED
+    // NAMING: SPLIT BY "_" BEFORE THAT IS TILE TYPE, AFTER THAT IS MODIFIERS
     public enum Tile
     {
         GROUND_1,

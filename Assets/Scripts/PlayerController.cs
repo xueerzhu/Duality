@@ -68,49 +68,35 @@ public class PlayerController : MonoBehaviour
         // interaction with tiles
         Vector3 newPos = playerTransform.position + movement;
         Vector3Int pos = Vector3Int.FloorToInt(newPos);
-        bool canMove = InteractWithSquare(pos);
 
         // move
-        if (canMove) playerTransform.position += movement;
+        if (CanMoveToSquare(pos)) playerTransform.position += movement;
         yield break;
     }
     
-    // return true if can move there
-    private bool InteractWithSquare(Vector3Int squarePosition)
+    private bool CanMoveToSquare(Vector3Int squarePosition)
     {
         Square square = main.GetSquare(squarePosition);
 
         if (square == null) return false;
-        
+
+        bool canMoveToSquare = true;
         foreach (var tile in square.GetTiles())
         {
-            if (tile == Game.Tile.RIVER_ST_NX || tile == Game.Tile.RIVER_ST_PX
-            || tile == Game.Tile.RIVER_ST_NZ || tile == Game.Tile.RIVER_ST_PZ
-            || tile == Game.Tile.RIVER_EG_NX || tile == Game.Tile.RIVER_EG_PX
-            || tile == Game.Tile.RIVER_EG_NZ || tile == Game.Tile.RIVER_EG_PZ)
-            {
-                return InteractWithWater();
-            }
-            
-            if (tile == Game.Tile.STONE)
-            {
-                InteractWithStone(squarePosition);
-            }
+            canMoveToSquare = canMoveToSquare && CanMoveToTile(tile);
         }
 
-        return true;
-    }
-
-    private bool InteractWithWater()
-    {
-        return false;
+        return canMoveToSquare;
     }
     
-    private bool InteractWithStone(Vector3Int squarePosition)
+    // return true if player can move there
+    private bool CanMoveToTile(Game.Tile tile)
     {
-        Vector3Int moveVector = squarePosition - Vector3Int.FloorToInt(playerTransform.position);
-        // move stone
-        main.MoveTileFromTo(Game.Tile.STONE, squarePosition, squarePosition + moveVector);
+        string tileType = tile.ToString().Split("_")[0];
+        if (tileType == "RIVER" || tileType == "STONE")
+        {
+            return false;
+        }
         return true;
     }
 }
