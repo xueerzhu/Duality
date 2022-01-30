@@ -23,24 +23,14 @@ public class Board : MonoBehaviour
     public Game.WindDir windDirection;
     
     private Dictionary<Vector3Int, Square> board = new Dictionary<Vector3Int, Square>();
-    private Dictionary<Vector3Int, GameObject> rocks = new Dictionary<Vector3Int, GameObject>();
-    private bool isDirty;
+    private Dictionary<Vector3Int, GameObject> groundTiles = new Dictionary<Vector3Int, GameObject>();
 
     void Start()
     {
         ProcessBoard();
         RefreshBoard();
     }
-
-    private void Update()
-    {
-        if (isDirty)
-        {
-            RefreshBoard();
-            isDirty = false;
-        }
-    }
-
+    
     // Process board data using Rules:
     //  - Cloud generates River
     void ProcessBoard()
@@ -113,31 +103,33 @@ public class Board : MonoBehaviour
 
     void RefreshBoard()
     {
-        rocks.Clear();
+        groundTiles.Clear();
+        
         foreach (Vector3Int loc in board.Keys)
         {
             Vector3 locc = loc;
             foreach (var tile in board[loc].GetTiles())
             {
-                if (tile == Game.Tile.STONE)
+                if (tile.name == Game.Tile.STONE)
                 {
-                    rocks[loc] = Instantiate(tilePrefabs[(int)tile], locc, Quaternion.identity);
+                    Instantiate(tilePrefabs[(int)tile.name], locc, Quaternion.identity);
                 }
-                else if (tile.ToString().Split('_')[0] == "GROUND")
+                else if (tile.name.ToString().Split('_')[0] == "GROUND")
                 {
                     int r = Random.Range(0, 100);
                     if (r % 2 == 0)
                     {
-                        Instantiate(tilePrefabs[(int)tile], locc, Quaternion.Euler(0, r % 3 * 90, 180));
+                        groundTiles.Add(loc, Instantiate(tilePrefabs[(int) tile.name], locc,
+                            Quaternion.Euler(0, r % 3 * 90, 180)));
                     }
                     else if (r % 2 == 1)
                     {
-                        Instantiate(tilePrefabs[(int)tile], locc, Quaternion.Euler(0, r % 3 * 90, 0));
+                        groundTiles.Add(loc, Instantiate(tilePrefabs[(int)tile.name], locc, Quaternion.Euler(0, r % 3 * 90, 0)));
                     }
                 }
                 else
                 {
-                    Instantiate(tilePrefabs[(int)tile], locc, Quaternion.identity);
+                    Instantiate(tilePrefabs[(int)tile.name], locc, Quaternion.identity);
                 }
                 
             }
@@ -150,7 +142,7 @@ public class Board : MonoBehaviour
         {
             foreach (var t in board[loc].GetTiles())
             {
-                Debug.Log(loc + " tile: " + t);
+                Debug.Log(loc + " tile: " + t.name);
             }
         }
     }
@@ -168,12 +160,29 @@ public class Board : MonoBehaviour
         }
     }
 
-    public void MoveTileFromToInternal(Game.Tile tile, Vector3Int from, Vector3Int to)
+    public void FlipGroundTileInternal(Vector3Int loc)
     {
-        board[from].GetTiles().Remove(tile);
-        if (tile == Game.Tile.STONE) Destroy(rocks[from]);
-        board[to].GetTiles().Add(tile);
-        isDirty = true;
+        Tile gt = null;
+        foreach (var t in board[loc].GetTiles())
+        {
+            if (t.name.ToString().Split("_")[0] == "GROUND")
+            {
+                gt = t;
+            }
+        }
+
+        int r = Random.Range(10, 30);
+        if (r % 2 == 0)
+        {
+            groundTiles[loc].transform.eulerAngles += new Vector3(0 ,0, r);
+        }
+        else if  (r % 2 == 1)
+        {
+            groundTiles[loc].transform.eulerAngles += new Vector3(r, 0, 0);
+        }
+    
+        if(gt != null) gt.Flip();
+
     }
 
     private void getRiverTile(Vector3Int square, Game.WindDir wind, out Game.Tile river)
@@ -216,20 +225,36 @@ public class Board : MonoBehaviour
 
 public class Square
 {
-    private List<Game.Tile> tiles;
+    private List<Tile> tiles;
     public Square()
     {
-        tiles = new List<Game.Tile>();
+        tiles = new List<Tile>();
     }
 
     public void AppendTile(Game.Tile tile)
     {
-        tiles.Add(tile);
+        tiles.Add(new Tile(tile));
     }
 
-    public List<Game.Tile> GetTiles()
+    public List<Tile> GetTiles()
     {
         return tiles;
     }
+}
+
+public class Tile
+{
+    public readonly Game.Tile name;
+    public bool isFlipped { get; private set; }
+
+    public Tile(Game.Tile tileName)
+    {
+        name = tileName;
+    }
+    public void Flip()
+    {
+        isFlipped = true;  // ground tiles can only be flipped once, not two way design
+    }
+    
 }
 

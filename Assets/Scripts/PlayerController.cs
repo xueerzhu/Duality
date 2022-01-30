@@ -65,12 +65,14 @@ public class PlayerController : MonoBehaviour
     // COROUTINES
     private IEnumerator Move(Vector3 movement)
     {
-        // interaction with tiles
-        Vector3 newPos = playerTransform.position + movement;
-        Vector3Int pos = Vector3Int.FloorToInt(newPos);
-
-        // move
-        if (CanMoveToSquare(pos)) playerTransform.position += movement;
+        Vector3Int newPos = Vector3Int.FloorToInt(playerTransform.position + movement);
+        if (CanMoveToSquare(newPos))
+        {
+            // flip current tile
+            main.FlipGroundTile(Vector3Int.FloorToInt(playerTransform.position));
+            // move to new tile
+            playerTransform.position += movement;
+        }
         yield break;
     }
     
@@ -89,11 +91,14 @@ public class PlayerController : MonoBehaviour
         return canMoveToSquare;
     }
     
-    // return true if player can move there
-    private bool CanMoveToTile(Game.Tile tile)
+    private bool CanMoveToTile(Tile tile)
     {
-        string tileType = tile.ToString().Split("_")[0];
+        string tileType = tile.name.ToString().Split("_")[0];
         if (tileType == "RIVER" || tileType == "STONE")
+        {
+            return false;
+        }
+        else if(tileType == "GROUND" && tile.isFlipped)
         {
             return false;
         }

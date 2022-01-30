@@ -44,9 +44,9 @@ public class Main : MonoBehaviour
         return board.GetSquareInternal(squareLocation);
     }
 
-    public void MoveTileFromTo(Game.Tile tile, Vector3Int from, Vector3Int to)
+    public void FlipGroundTile(Vector3Int tileLoc)
     {
-        board.MoveTileFromToInternal(tile, from, to);
+        board.FlipGroundTileInternal(tileLoc);
     }
 
     // INPUTS
