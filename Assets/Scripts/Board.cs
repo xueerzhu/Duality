@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
+using UnityEngine.UIElements;
 
 public class Board : MonoBehaviour
 {
@@ -67,12 +68,22 @@ public class Board : MonoBehaviour
         board[stonePosition].AppendTile(Game.Tile.STONE);
         
         // 3. squares with water
+        float rotate;
+        bool isEdge;
         if (windDirection == Game.WindDir.X)
         {
             for (int x = 0 - xHalf; x <  0 - xHalf + startBoardSizeX; x++)
             {
                 Vector3Int r = new Vector3Int(x, cloudPosition.y, cloudPosition.z);
-                board[r].AppendTile(Game.Tile.RIVER_STRAIGHT);
+                getRiverEdge(r, windDirection, out rotate, out isEdge);
+                if (isEdge)
+                {
+                    board[r].AppendTile(Game.Tile.RIVER_EDGE);
+                }
+                else
+                {
+                    board[r].AppendTile(Game.Tile.RIVER_STRAIGHT);
+                }
             }
         }
         else
@@ -80,7 +91,16 @@ public class Board : MonoBehaviour
             for (int z = 0 - zHalf; z < 0 - zHalf + startBoardSizeZ; z++)
             {
                 Vector3Int r = new Vector3Int(cloudPosition.x, cloudPosition.y, z);
-                board[r].AppendTile(Game.Tile.RIVER_STRAIGHT);
+                getRiverEdge(r, windDirection, out rotate, out isEdge);
+                if (isEdge)
+                {
+                    board[r].AppendTile(Game.Tile.RIVER_EDGE);
+                }
+                else
+                {
+                    board[r].AppendTile(Game.Tile.RIVER_STRAIGHT);
+                }
+                
             }
         }
     }
@@ -128,6 +148,41 @@ public class Board : MonoBehaviour
         if (tile == Game.Tile.STONE) Destroy(rocks[from]);
         board[to].GetTiles().Add(tile);
         isDirty = true;
+    }
+
+    private void getRiverEdge(Vector3Int square, Game.WindDir wind, out float rotateAngle, out bool isEdge)
+    {
+        isEdge = false;
+        
+        int xHalf = (int) Math.Round(Decimal.ToDouble(startBoardSizeX) / 2);
+        int zHalf = (int) Math.Round(Decimal.ToDouble(startBoardSizeZ) / 2);
+
+        if (wind == Game.WindDir.X)
+        {
+            if (square.x == 0 - xHalf)
+            {
+                rotateAngle = 180;
+                isEdge = true;
+            }
+            else if (square.x == 0 - xHalf + startBoardSizeX - 1)
+            {
+                isEdge = true;
+            }
+        }
+        else
+        {
+            if (square.z == 0 - zHalf)
+            {
+                rotateAngle = 90;
+                isEdge = true;
+            }
+            else if (square.z == 0 - zHalf + startBoardSizeZ - 1)
+            {
+                isEdge = true;
+                rotateAngle = 270;
+            }
+        }
+        rotateAngle = 0;
     }
 }
 

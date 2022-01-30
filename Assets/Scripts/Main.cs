@@ -15,6 +15,7 @@ public class Main : MonoBehaviour
     [SerializeField] private bool isFlip;
     [SerializeField] private float rotationSpeed;
     [SerializeField] private float flipSpeed;
+    [SerializeField] private AnimationCurve flipCurve;
     
     private Game.Side boardSide;
     private bool isRotating = false;
@@ -113,36 +114,39 @@ public class Main : MonoBehaviour
         }
         else
         {
-            float p = 0f;
-            float s = flipSpeed;
-            
-            // rotate for a certain duration
-            while (time < 0.5f)  
+            while (time < 0.6f)
             {
-                p = time / 0.5f * Mathf.PI / 2;
-                s = flipSpeed * Mathf.Sin((Mathf.PI / 2 + p));  // flip using sin wave
-                Debug.Log("s " + s + " p " + p);
-                /*speed = Mathf.Lerp(speed, 1 ,time / 0.5f);
-                speed *= 0.99f;*/
-                deltaEulerAngles += new Vector3(1,0,0) * Time.deltaTime * s ;  //  flip across x, vertical in view
-                viewTransform.eulerAngles = startEulerAngles + deltaEulerAngles;
+                viewTransform.eulerAngles = EaseInOut(time / 0.5f) * new Vector3(360*1+90,0,0);
+                // viewTransform.eulerAngles = new Vector3(360*1+90,0,0) * flipCurve.Evaluate(time / 0.5f);
                 time += Time.deltaTime;
                 yield return null;
             }
             
-            // complete rotation
-            while (deltaEulerAngles.x < endValue.x)
-            {
-                deltaEulerAngles += new Vector3(1, 0, 0) * Time.deltaTime * s;
-                viewTransform.eulerAngles = startEulerAngles + deltaEulerAngles;
-                time += Time.deltaTime;
-                yield return null;
-            }
-            viewTransform.eulerAngles = endValue;
             isRotating = false;
         }
 
         
+    }
+    
+    
+    public static float EaseOut(float t)
+    {
+        return Flip(Flip(t) * Flip(t) * Flip(t) * Flip(t));
+    }
+    
+    public static float EaseIn(float t)
+    {
+        return Flip(t) * Flip(t) * Flip(t) * Flip(t);
+    }
+    
+    public static float EaseInOut(float t)
+    {
+        return Mathf.Lerp(EaseIn(t), EaseOut(t), t);
+    }
+
+    static float Flip(float x)
+    {
+        return 1 - x;
     }
     
 }

@@ -569,7 +569,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 330585543}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: -9.45}
+  m_LocalPosition: {x: 0, y: 0, z: -7.39}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -2009,8 +2009,50 @@ MonoBehaviour:
   board: {fileID: 1788674043}
   viewTransform: {fileID: 1916426488}
   isFlip: 1
-  rotationSpeed: 1.32
+  rotationSpeed: 0.33
   flipSpeed: 2200
+  flipCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0.008335382
+      value: 0.0047256052
+      inSlope: -0.0037145494
+      outSlope: -0.018533245
+      tangentMode: 1
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0.72936976
+    - serializedVersion: 3
+      time: 0.45478228
+      value: 0.14105622
+      inSlope: 1.1917111
+      outSlope: 1.1917111
+      tangentMode: 1
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 0.5948519
+      value: 0.88021487
+      inSlope: 1.2204839
+      outSlope: 1.2204839
+      tangentMode: 1
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 1.0454407
+      value: 1.030426
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
 --- !u!114 &1017756711
 MonoBehaviour:
   m_ObjectHideFlags: 0
