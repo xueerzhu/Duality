@@ -1,17 +1,23 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using UnityEngine.Serialization;
 
 public class Main : MonoBehaviour
 {
+    public Vector3 testAngle;
     [SerializeField] private PlayerController playerA; 
     [SerializeField] private PlayerController playerB; 
     [SerializeField] private Board board; 
-    [SerializeField] private Transform viewTransform; 
-    [SerializeField] private float flipDuration;
+    [SerializeField] private Transform viewTransform;
+    [SerializeField] private bool isFlip;
+    [SerializeField] private float rotationSpeed;
+    [SerializeField] private float flipSpeed;
     
     private Game.Side boardSide;
+    private bool isRotating = false;
     
     void Start()
     {
@@ -64,45 +70,79 @@ public class Main : MonoBehaviour
     {
         float flip = flipValue.Get<float>();
 
+        if (isRotating)
+        {
+            isRotating = false;
+            return;
+        }
+        
         if (flip == 1f)
         {
             if (boardSide == Game.Side.ALPHA)
             {
-                StartCoroutine(RotateBoard(Quaternion.Euler(180f, 0f, 0f), flipDuration));
+                StartCoroutine(RotateBoard(new Vector3(90f, 0f, 0f), isFlip));
                 SetBoardSide(Game.Side.BETA);
             }
             else
             {
-                StartCoroutine(RotateBoard(Quaternion.Euler(0f, 0f, 0f), flipDuration));
+                StartCoroutine(RotateBoard(new Vector3(270f, 0f, 0f), isFlip));
                 SetBoardSide(Game.Side.ALPHA);
             }
         }
     }
     
     // COROUTINES
-    private IEnumerator RotateBoard(Quaternion endValue, float duration = 0f)
+    private IEnumerator RotateBoard(Vector3 endValue, bool isFlip)
     {
-        float time = 0;
-        Quaternion startValue = viewTransform.rotation;
+        isRotating = true;
         
-        while (time < duration)
-        {
-            viewTransform.rotation = Quaternion.Lerp(startValue, endValue, time / duration);
-            time += Time.deltaTime;
-            yield return null;
-        }
-        viewTransform.rotation = endValue;
+        float time = 0;
+        Vector3 startEulerAngles = viewTransform.eulerAngles;
+        Vector3 deltaEulerAngles = Vector3.zero;
         
         // rotate continuously
-        if (duration == 0f)  
+        if (!isFlip)  
         {
-            while (true)
+            while (isRotating)
             {
-                viewTransform.rotation = Quaternion.Lerp(startValue, endValue, time / duration);
+                deltaEulerAngles += testAngle * Time.deltaTime * rotationSpeed;
                 time += Time.deltaTime;
+                viewTransform.eulerAngles = startEulerAngles + deltaEulerAngles;
                 yield return null;
             }
         }
+        else
+        {
+            float p = 0f;
+            float s = flipSpeed;
+            
+            // rotate for a certain duration
+            while (time < 0.5f)  
+            {
+                p = time / 0.5f * Mathf.PI / 2;
+                s = flipSpeed * Mathf.Sin((Mathf.PI / 2 + p));  // flip using sin wave
+                Debug.Log("s " + s + " p " + p);
+                /*speed = Mathf.Lerp(speed, 1 ,time / 0.5f);
+                speed *= 0.99f;*/
+                deltaEulerAngles += new Vector3(1,0,0) * Time.deltaTime * s ;  //  flip across x, vertical in view
+                viewTransform.eulerAngles = startEulerAngles + deltaEulerAngles;
+                time += Time.deltaTime;
+                yield return null;
+            }
+            
+            // complete rotation
+            while (deltaEulerAngles.x < endValue.x)
+            {
+                deltaEulerAngles += new Vector3(1, 0, 0) * Time.deltaTime * s;
+                viewTransform.eulerAngles = startEulerAngles + deltaEulerAngles;
+                time += Time.deltaTime;
+                yield return null;
+            }
+            viewTransform.eulerAngles = endValue;
+            isRotating = false;
+        }
+
+        
     }
     
 }

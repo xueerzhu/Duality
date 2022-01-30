@@ -2003,11 +2003,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7240d618930fd9f48b1f51a899e404c2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  testAngle: {x: 26.93, y: 149.1, z: 11.26}
   playerA: {fileID: 1457006047}
   playerB: {fileID: 985731393}
   board: {fileID: 1788674043}
   viewTransform: {fileID: 1916426488}
-  flipDuration: 1.5
+  isFlip: 1
+  rotationSpeed: 1.32
+  flipSpeed: 2200
 --- !u!114 &1017756711
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3346,10 +3349,10 @@ MonoBehaviour:
   tilePrefabs:
   - {fileID: 4090280514627964774, guid: 97899632ccaaca44d9588418cd30a449, type: 3}
   - {fileID: 4429284644286673260, guid: db307570a294c5e47aa981ffb4232fe1, type: 3}
-  - {fileID: 4454954488267702315, guid: b3e93dd6c25a41841a09ff3c061098aa, type: 3}
-  - {fileID: 1657618406430342033, guid: 9f25fb79fb15cf1479f9488ec37eb3d3, type: 3}
+  - {fileID: 919132149155446097, guid: de02a74109838904287c27d5e710506f, type: 3}
+  - {fileID: 919132149155446097, guid: bf36bb3f823caf34f85712eed985fe28, type: 3}
   - {fileID: 5679079201715646550, guid: 226b1e941f7949d4c9719b2d87a6a560, type: 3}
-  - {fileID: 3727630750864075482, guid: ce80684cfcfe50c4f8fc14b4124bb028, type: 3}
+  - {fileID: 8494990104889546599, guid: ca388a186295b0c44815595d5c9dda33, type: 3}
   startBoardSizeX: 5
   startBoardSizeZ: 6
   cloudPosition: {x: 2, y: 0, z: -3}
