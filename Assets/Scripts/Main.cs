@@ -9,7 +9,6 @@ public class Main : MonoBehaviour
 {
     public Vector3 testAngle;
     [SerializeField] private PlayerController playerA; 
-    [SerializeField] private PlayerController playerB; 
     [SerializeField] private Board board; 
     [SerializeField] private Transform viewTransform;
     [SerializeField] private bool isFlip;
@@ -32,7 +31,6 @@ public class Main : MonoBehaviour
     private void InitPlayerControllers()
     {
         playerA.InitPlayer(Game.Side.ALPHA, this);
-        playerB.InitPlayer(Game.Side.BETA, this);
     }
 
     public void SetBoardSide(Game.Side side)
@@ -60,10 +58,6 @@ public class Main : MonoBehaviour
         if (boardSide == Game.Side.ALPHA)
         {
             playerA.Move(vectorA);
-        }
-        else
-        {
-            playerB.Move(vectorB);
         }
     }
 
