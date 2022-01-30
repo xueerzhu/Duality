@@ -24,7 +24,7 @@ RenderSettings:
   m_AmbientEquatorColor: {r: 0.114, g: 0.125, b: 0.133, a: 1}
   m_AmbientGroundColor: {r: 0.047, g: 0.043, b: 0.035, a: 1}
   m_AmbientIntensity: 1
-  m_AmbientMode: 4
+  m_AmbientMode: 0
   m_SubtractiveShadowColor: {r: 0.42, g: 0.478, b: 0.627, a: 1}
   m_SkyboxMaterial: {fileID: 0}
   m_HaloStrength: 0.5
@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.1280942, g: 0.15871572, b: 0.21006799, a: 1}
+  m_IndirectSpecularColor: {r: 2079.7666, g: 917.5923, b: 539.58325, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -201,8 +201,8 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 330585543}
-  m_LocalRotation: {x: 0.20781648, y: -0.0029247773, z: 0.00062138593, w: 0.9781633}
-  m_LocalPosition: {x: 0.059801072, y: 4.45, z: -9.999873}
+  m_LocalRotation: {x: 0.20781568, y: -0.0029247664, z: 0.00062138104, w: 0.9781635}
+  m_LocalPosition: {x: 0.059801213, y: 4.45, z: -9.999917}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -1561,8 +1561,8 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1545202038}
-  m_LocalRotation: {x: 0.20781742, y: 0.0000000018626451, z: -4.0745363e-10, w: 0.9781677}
-  m_LocalPosition: {x: -0.00000015646219, y: 4.45, z: -10.000052}
+  m_LocalRotation: {x: 0.20781659, y: 0.000000013271345, z: -0.0000000029103826, w: 0.9781678}
+  m_LocalPosition: {x: -0.00000027567148, y: 4.45, z: -10.000096}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -1599,7 +1599,7 @@ MonoBehaviour:
     ModeOverride: 0
     LensShift: {x: 0, y: 0}
     GateFit: 2
-    m_SensorSize: {x: 2.3239172, y: 1}
+    m_SensorSize: {x: 1.7777778, y: 1}
     Iso: 200
     ShutterSpeed: 0.005
     Aperture: 16
@@ -1661,7 +1661,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   tilePrefabs:
-  - {fileID: 4090280514627964774, guid: 97899632ccaaca44d9588418cd30a449, type: 3}
+  - {fileID: 5875479484819512299, guid: 2aeb17f44563c5b4c9f9f8c95c4de943, type: 3}
+  - {fileID: 7814469111256453879, guid: ca39f1db05d26ce4696b51c8dfc30242, type: 3}
+  - {fileID: 3612758625647332156, guid: 75a3b4a7ac371a843b365428238ca1ac, type: 3}
+  - {fileID: 3315678701137629976, guid: cd798aa78829ca54bb14afbf2175eda7, type: 3}
   - {fileID: 5238762059280373622, guid: da50241ef8b851b4099e9621cb4d05bd, type: 3}
   - {fileID: 4557554458280920184, guid: 626b18ad1256ae64da864a8523433a72, type: 3}
   - {fileID: 2544578018821463942, guid: 34cb7f471d709df4592d24dd894f695a, type: 3}
@@ -1672,6 +1675,7 @@ MonoBehaviour:
   - {fileID: 1389652199158589761, guid: 42ff91d414fc23d468fb23bf103e7e68, type: 3}
   - {fileID: 3719795686482475151, guid: 4f074c0d3e8513145ba063d65e580b26, type: 3}
   - {fileID: 2878520367286438786, guid: 29d8b922a688a2246bb4ff8c8746ddf4, type: 3}
+  groundTileCount: 4
   startBoardSizeX: 5
   startBoardSizeZ: 6
   cloudPosition: {x: 2, y: 0, z: -3}

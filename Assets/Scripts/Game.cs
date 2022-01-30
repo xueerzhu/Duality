@@ -13,7 +13,10 @@ public static class Game
     // TODO: EDITOR DEPENDENCY KEEP THIS UPDATED
     public enum Tile
     {
-        GROUND,
+        GROUND_1,
+        GROUND_2,
+        GROUND_3,
+        GROUND_4,
         CLOUD,
         STONE,
         RIVER_ST_NX,

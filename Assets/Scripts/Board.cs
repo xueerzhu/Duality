@@ -2,15 +2,20 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
+using UnityEditor;
 using UnityEngine;
 using UnityEngine.Tilemaps;
 using UnityEngine.UIElements;
+using Random = UnityEngine.Random;
 
 public class Board : MonoBehaviour
 {
+    // TILES DATA
     public List<GameObject> tilePrefabs = new List<GameObject>();
-    
+    public int groundTileCount;
+
     // BOARD DATA
+    [Header("LEVEL")]
     public int startBoardSizeX;
     public int startBoardSizeZ;
     public Vector3Int cloudPosition;
@@ -57,7 +62,22 @@ public class Board : MonoBehaviour
         // 1. fill with ground tiles
         foreach (var loc in board.Keys)
         {
-            board[loc].AppendTile(Game.Tile.GROUND);
+            int groundID = Random.Range(1, groundTileCount + 1);
+            switch (groundID)
+            {
+                case 1:
+                    board[loc].AppendTile(Game.Tile.GROUND_1);
+                    break;
+                case 2:
+                    board[loc].AppendTile(Game.Tile.GROUND_2);
+                    break;
+                case 3:
+                    board[loc].AppendTile(Game.Tile.GROUND_3);
+                    break;
+                case 4:
+                    board[loc].AppendTile(Game.Tile.GROUND_4);
+                    break;
+            }
         }
         
         // 2. squares with cloud tile, stone tile
