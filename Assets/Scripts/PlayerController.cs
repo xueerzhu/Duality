@@ -74,10 +74,13 @@ public class PlayerController : MonoBehaviour
         if (canMove) playerTransform.position += movement;
         yield break;
     }
-
+    
+    // return true if can move there
     private bool InteractWithSquare(Vector3Int squarePosition)
     {
         Square square = main.GetSquare(squarePosition);
+
+        if (square == null) return false;
         
         foreach (var tile in square.GetTiles())
         {

@@ -125,7 +125,15 @@ public class Board : MonoBehaviour
 
     public Square GetSquareInternal(Vector3Int squareLocation)
     {
-        return board[squareLocation];
+        if (board.ContainsKey(squareLocation))
+        {
+            return board[squareLocation];
+
+        }
+        else
+        {
+            return null;
+        }
     }
 
     public void MoveTileFromToInternal(Game.Tile tile, Vector3Int from, Vector3Int to)
@@ -138,8 +146,6 @@ public class Board : MonoBehaviour
 
     private void getRiverTile(Vector3Int square, Game.WindDir wind, out Game.Tile river)
     {
-        bool isEdge = false;
-        
         int xHalf = (int) Math.Round(Decimal.ToDouble(startBoardSizeX) / 2);
         int zHalf = (int) Math.Round(Decimal.ToDouble(startBoardSizeZ) / 2);
 
