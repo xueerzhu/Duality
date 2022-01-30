@@ -3349,10 +3349,10 @@ MonoBehaviour:
   tilePrefabs:
   - {fileID: 4090280514627964774, guid: 97899632ccaaca44d9588418cd30a449, type: 3}
   - {fileID: 4429284644286673260, guid: db307570a294c5e47aa981ffb4232fe1, type: 3}
-  - {fileID: 919132149155446097, guid: de02a74109838904287c27d5e710506f, type: 3}
-  - {fileID: 919132149155446097, guid: bf36bb3f823caf34f85712eed985fe28, type: 3}
+  - {fileID: 5848543607780993378, guid: 8dd1e26a00c70224abda191d26ff3d6f, type: 3}
+  - {fileID: 4880264646432173647, guid: db477dc0d2612204a88002a0c87833c3, type: 3}
   - {fileID: 5679079201715646550, guid: 226b1e941f7949d4c9719b2d87a6a560, type: 3}
-  - {fileID: 8494990104889546599, guid: ca388a186295b0c44815595d5c9dda33, type: 3}
+  - {fileID: 5238762059280373622, guid: da50241ef8b851b4099e9621cb4d05bd, type: 3}
   startBoardSizeX: 5
   startBoardSizeZ: 6
   cloudPosition: {x: 2, y: 0, z: -3}
