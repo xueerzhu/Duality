@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using UnityEngine.Tilemaps;
 
 public class PlayerController : MonoBehaviour
 {
@@ -80,22 +81,17 @@ public class PlayerController : MonoBehaviour
         
         foreach (var tile in square.GetTiles())
         {
-            switch (tile)
+            if (tile == Game.Tile.RIVER_ST_NX || tile == Game.Tile.RIVER_ST_PX
+            || tile == Game.Tile.RIVER_ST_NZ || tile == Game.Tile.RIVER_ST_PZ
+            || tile == Game.Tile.RIVER_EG_NX || tile == Game.Tile.RIVER_EG_PX
+            || tile == Game.Tile.RIVER_EG_NZ || tile == Game.Tile.RIVER_EG_PZ)
             {
-                case Game.Tile.RIVER_90:
-                    return InteractWithWater();
-                    break;
-                case Game.Tile.RIVER_EDGE:
-                    return InteractWithWater();
-                    break;
-                case Game.Tile.RIVER_STRAIGHT:
-                    return InteractWithWater();
-                    break;
-                case Game.Tile.STONE:
-                    return InteractWithStone(squarePosition);
-                    break;
-                default:
-                    break;
+                return InteractWithWater();
+            }
+            
+            if (tile == Game.Tile.STONE)
+            {
+                InteractWithStone(squarePosition);
             }
         }
 
