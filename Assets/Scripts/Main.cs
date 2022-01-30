@@ -80,7 +80,7 @@ public class Main : MonoBehaviour
     }
     
     // COROUTINES
-    private IEnumerator RotateBoard(Quaternion endValue, float duration)
+    private IEnumerator RotateBoard(Quaternion endValue, float duration = 0f)
     {
         float time = 0;
         Quaternion startValue = viewTransform.rotation;
@@ -92,5 +92,17 @@ public class Main : MonoBehaviour
             yield return null;
         }
         viewTransform.rotation = endValue;
+        
+        // rotate continuously
+        if (duration == 0f)  
+        {
+            while (true)
+            {
+                viewTransform.rotation = Quaternion.Lerp(startValue, endValue, time / duration);
+                time += Time.deltaTime;
+                yield return null;
+            }
+        }
     }
+    
 }
