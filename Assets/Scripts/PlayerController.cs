@@ -15,8 +15,10 @@ public class PlayerController : MonoBehaviour
     
     private float movementX;
     private float movementZ;
+    private Vector3Int cachePlayerMovingTo;
     
     private Animator _animator;
+    private bool isMoving;
     public bool anim_isLifted;
     
     void Start()
@@ -75,10 +77,9 @@ public class PlayerController : MonoBehaviour
     private IEnumerator Move(Vector3 movement)
     {
         Vector3Int newPos = Vector3Int.FloorToInt(playerTransform.position + movement);
-        if (CanMoveToSquare(newPos))
+        if (CanMoveToSquare(newPos) && !isMoving)
         {
-            
-            
+            isMoving = true;
             // rotate player
             Vector3 newAngle = Vector3.forward;
             if (movement.x == 1)
@@ -113,7 +114,10 @@ public class PlayerController : MonoBehaviour
             
             // flip current tile
             main.FlipGroundTile(Vector3Int.FloorToInt(startPos));
+            
             // lerp position
+            cachePlayerMovingTo = Vector3Int.FloorToInt(playerTransform.position + movement);
+
             while (time < 0.75f)
             {
                
@@ -128,10 +132,9 @@ public class PlayerController : MonoBehaviour
                 _animator.SetTrigger("TriggerLower");
                 anim_isLifted = false;
             }
-            
+
+            isMoving = false;
         }
-        
-        
     }
     
     private bool CanMoveToSquare(Vector3Int squarePosition)
@@ -156,7 +159,8 @@ public class PlayerController : MonoBehaviour
         {
             return false;
         }
-        else if(tileType == "GROUND" && tile.isFlipped)
+        
+        if(tileType == "GROUND" && tile.isFlipped)
         {
             return false;
         }
