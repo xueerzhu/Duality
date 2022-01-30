@@ -2008,7 +2008,7 @@ MonoBehaviour:
   playerB: {fileID: 985731393}
   board: {fileID: 1788674043}
   viewTransform: {fileID: 1916426488}
-  isFlip: 1
+  isFlip: 0
   rotationSpeed: 0.33
   flipSpeed: 2200
   flipCurve:

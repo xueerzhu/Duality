@@ -81,19 +81,35 @@ public class Main : MonoBehaviour
         {
             if (boardSide == Game.Side.ALPHA)
             {
-                StartCoroutine(RotateBoard(new Vector3(90f, 0f, 0f), isFlip));
+                StartCoroutine(FlipBoard(new Vector3(270f, 0f, 0f)));
                 SetBoardSide(Game.Side.BETA);
             }
             else
             {
-                StartCoroutine(RotateBoard(new Vector3(270f, 0f, 0f), isFlip));
+                StartCoroutine(FlipBoard(new Vector3(90f, 0f, 0f)));
                 SetBoardSide(Game.Side.ALPHA);
             }
         }
     }
     
+    private void OnRotateBoard(InputValue rotateValue)
+    {
+        float r = rotateValue.Get<float>();
+
+        if (isRotating)
+        {
+            isRotating = false;
+            return;
+        }
+        
+        if (r == 1f)
+        {
+            StartCoroutine(RotateBoard());
+        }
+    }
+    
     // COROUTINES
-    private IEnumerator RotateBoard(Vector3 endValue, bool isFlip)
+    private IEnumerator FlipBoard(Vector3 endValue)
     {
         isRotating = true;
         
@@ -101,34 +117,35 @@ public class Main : MonoBehaviour
         Vector3 startEulerAngles = viewTransform.eulerAngles;
         Vector3 deltaEulerAngles = Vector3.zero;
         
-        // rotate continuously
-        if (!isFlip)  
+        while (time < 0.6f)
         {
-            while (isRotating)
-            {
-                deltaEulerAngles += testAngle * Time.deltaTime * rotationSpeed;
-                time += Time.deltaTime;
-                viewTransform.eulerAngles = startEulerAngles + deltaEulerAngles;
-                yield return null;
-            }
+            viewTransform.eulerAngles = EaseOut(time / 0.5f) * (new Vector3(360*1,0,0) + endValue);
+            // viewTransform.eulerAngles = (new Vector3(360*1,0,0) + endValue) * flipCurve.Evaluate(time / 0.5f);
+            time += Time.deltaTime;
+            yield return null;
         }
-        else
-        {
-            while (time < 0.6f)
-            {
-                viewTransform.eulerAngles = EaseInOut(time / 0.5f) * new Vector3(360*1+90,0,0);
-                // viewTransform.eulerAngles = new Vector3(360*1+90,0,0) * flipCurve.Evaluate(time / 0.5f);
-                time += Time.deltaTime;
-                yield return null;
-            }
-            
-            isRotating = false;
-        }
-
-        
+        isRotating = false;
     }
     
+    private IEnumerator RotateBoard()
+    {
+        isRotating = true;
+        
+        float time = 0;
+        Vector3 startEulerAngles = viewTransform.eulerAngles;
+        Vector3 deltaEulerAngles = Vector3.zero;
+        
+        while (isRotating)
+        {
+            deltaEulerAngles += testAngle * Time.deltaTime * rotationSpeed;
+            time += Time.deltaTime;
+            viewTransform.eulerAngles = startEulerAngles + deltaEulerAngles;
+            yield return null;
+        }
+        isRotating = false;
+    }
     
+    // ANIMATION
     public static float EaseOut(float t)
     {
         return Flip(Flip(t) * Flip(t) * Flip(t) * Flip(t));
