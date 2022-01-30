@@ -14,9 +14,13 @@ public class PlayerController : MonoBehaviour
     private float movementX;
     private float movementZ;
     
+    private Animator _animator;
+    private bool state;
+    
     void Start()
     {
         playerTransform = GetComponent<Transform>();
+        _animator = GetComponent<Animator>();
     }
 
     public void InitPlayer(Game.Side playerGameSide, Main m)
@@ -71,6 +75,27 @@ public class PlayerController : MonoBehaviour
             // flip current tile
             main.FlipGroundTile(Vector3Int.FloorToInt(playerTransform.position));
             // move to new tile
+            Vector3 newAngle = Vector3.forward;
+            if (movement.x == 1)
+            {
+                newAngle = new Vector3(0, 90, 0);
+            }
+            
+            if (movement.x == -1)
+            {
+                newAngle = new Vector3(0, 270, 0);
+            }
+            
+            if (movement.z == 1)
+            {
+                newAngle = new Vector3(0, 360, 0);
+            }
+            
+            if (movement.z == -1)
+            {
+                newAngle = new Vector3(0, 180, 0);
+            }
+            playerTransform.eulerAngles = newAngle;
             playerTransform.position += movement;
         }
         yield break;
