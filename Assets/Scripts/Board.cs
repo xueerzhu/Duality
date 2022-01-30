@@ -61,7 +61,7 @@ public class Board : MonoBehaviour
         // 2. squares with cloud tile, stone tile
         if (!board.ContainsKey(cloudPosition))
         {
-            Debug.LogError("Invalid cloud location: outside of board");
+            // Debug.LogError("Invalid cloud location: outside of board");
         }
         board[cloudPosition].AppendTile(Game.Tile.CLOUD);
         board[stonePosition].AppendTile(Game.Tile.STONE);

@@ -2003,11 +2003,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7240d618930fd9f48b1f51a899e404c2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  testAngle: {x: 26.93, y: 149.1, z: 11.26}
   playerA: {fileID: 1457006047}
   playerB: {fileID: 985731393}
   board: {fileID: 1788674043}
   viewTransform: {fileID: 1916426488}
-  flipDuration: 1.5
+  isFlip: 1
+  rotationSpeed: 1.32
+  flipSpeed: 2200
 --- !u!114 &1017756711
 MonoBehaviour:
   m_ObjectHideFlags: 0
