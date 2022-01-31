@@ -5,17 +5,21 @@ using UnityEngine;
 public class CharacterAnimator : MonoBehaviour
 {
     private Animator _animator;
+    [SerializeField] private float animationSpeed;
     private bool state;
 
     private void Start()
     {
         _animator = GetComponent<Animator>();
+        _animator.speed = animationSpeed;
     }
 
 
     // Update is called once per frame
     void Update()
     {
+        _animator.speed = animationSpeed;
+
         if(Input.GetKeyDown(KeyCode.Space))
         {
             Debug.Log("Space");

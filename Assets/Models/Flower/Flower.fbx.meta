@@ -1,9 +1,24 @@
 fileFormatVersion: 2
-guid: 5f2f26ed4d1f8334bbeab3007ee5cc18
+guid: 57fbf2249a4a4de4bbdb3cfef09fd319
 ModelImporter:
   serializedVersion: 21202
   internalIDToNameTable: []
-  externalObjects: {}
+  externalObjects:
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Petals
+    second: {fileID: 2100000, guid: 85b4ff0bc8d901047b0f6e9498ab11bd, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Pistil
+    second: {fileID: 2100000, guid: 55835b5252c6d274a8b95030d7f357f8, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: StemLeaves
+    second: {fileID: 2100000, guid: 2422eb333fed5194aba7df26e4da1d8b, type: 2}
   materials:
     materialImportMode: 2
     materialName: 0
