@@ -27,8 +27,8 @@ public static class Game
         RIVER_EG_NX,
         RIVER_EG_PX,
         RIVER_EG_NZ,
-        RIVER_EG_PZ
-
+        RIVER_EG_PZ,
+        WIN
     };
     
     public enum WindDir
