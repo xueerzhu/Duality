@@ -7,16 +7,6 @@ ModelImporter:
   - first:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule
-      name: Cross
-    second: {fileID: 2100000, guid: 1e252b2752b60bb46a1b7aeb89a0052e, type: 2}
-  - first:
-      type: UnityEngine:Material
-      assembly: UnityEngine.CoreModule
-      name: Dirt
-    second: {fileID: 2100000, guid: d3088e56382c47a458ef40fc13b60c8f, type: 2}
-  - first:
-      type: UnityEngine:Material
-      assembly: UnityEngine.CoreModule
       name: Grass
     second: {fileID: 2100000, guid: 553ba25b6e40574448417b06a40f8a1c, type: 2}
   materials:
@@ -85,7 +75,7 @@ ModelImporter:
   tangentSpace:
     normalSmoothAngle: 60
     normalImportMode: 0
-    tangentImportMode: 3
+    tangentImportMode: 2
     normalCalculationMode: 4
     legacyComputeAllNormalsFromSmoothingGroupsWhenMeshHasBlendShapes: 0
     blendShapeNormalImportMode: 1
