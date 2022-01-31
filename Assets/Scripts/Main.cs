@@ -4,6 +4,8 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.Serialization;
+using UnityEngine.SceneManagement;
+
 
 public class Main : MonoBehaviour
 {
@@ -46,10 +48,7 @@ public class Main : MonoBehaviour
 
     public void FlipGroundTile(Vector3Int tileLoc)
     {
-        if (board.FlipGroundTileInternal(tileLoc))  // if is win tile
-        {
-            // TODO
-        }
+        StartCoroutine(board.FlipGroundTileInternal(tileLoc));
     }
 
     // INPUTS
@@ -102,6 +101,16 @@ public class Main : MonoBehaviour
         if (r == 1f)
         {
             StartCoroutine(RotateBoard());
+        }
+    }
+
+    private void OnRestart(InputValue restartValue)
+    {
+        float restart = restartValue.Get<float>();
+
+        if (restart == 1f)
+        {
+            SceneManager.LoadScene("GameScene");
         }
     }
     

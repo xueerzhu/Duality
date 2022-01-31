@@ -1218,14 +1218,23 @@ PrefabInstance:
       propertyPath: m_Name
       value: DemoLevel
       objectReference: {fileID: 0}
+    - target: {fileID: 1347178785580805900, guid: 1d89b97695d649546b26fc794aaa3ea5,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5464968402370533174, guid: 1d89b97695d649546b26fc794aaa3ea5,
+        type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5464968403231267402, guid: 1d89b97695d649546b26fc794aaa3ea5,
+        type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 1d89b97695d649546b26fc794aaa3ea5, type: 3}
---- !u!1 &1534928162 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 6704980558099035806, guid: 1d89b97695d649546b26fc794aaa3ea5,
-    type: 3}
-  m_PrefabInstance: {fileID: 1534928161}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1545202038
 GameObject:
   m_ObjectHideFlags: 0
@@ -1288,7 +1297,7 @@ MonoBehaviour:
     ModeOverride: 2
     LensShift: {x: 0, y: 0}
     GateFit: 2
-    m_SensorSize: {x: 1.7775551, y: 1}
+    m_SensorSize: {x: 1.7772512, y: 1}
     Iso: 200
     ShutterSpeed: 0.005
     Aperture: 15.8
@@ -1382,16 +1391,14 @@ MonoBehaviour:
   - {fileID: 3719795686482475151, guid: 4f074c0d3e8513145ba063d65e580b26, type: 3}
   - {fileID: 2878520367286438786, guid: 29d8b922a688a2246bb4ff8c8746ddf4, type: 3}
   groundTileCount: 4
-  startBoardSizeX: 5
+  startBoardSizeX: 6
   startBoardSizeZ: 6
-  cloudPosition: {x: 2, y: 0, z: -3}
+  cloudPosition: {x: 2, y: 0, z: 3}
   winPosition: {x: -2, y: 0, z: 2}
   stonePosition: {x: -1, y: 0, z: -1}
   stonePositions:
   - {x: -2, y: 0, z: 1}
   - {x: -1, y: 0, z: -2}
-  - {x: 1, y: 0, z: -2}
-  - {x: 1, y: 0, z: 1}
   riverPositions:
   - {x: -3, y: 0, z: 3}
   - {x: -2, y: 0, z: 3}
@@ -1399,9 +1406,8 @@ MonoBehaviour:
   - {x: 0, y: 0, z: 3}
   - {x: 1, y: 0, z: 3}
   - {x: 2, y: 0, z: 3}
-  - {x: 0, y: 0, z: 3}
-  - {x: 0, y: 0, z: 3}
-  groundParent: {fileID: 1534928162}
+  levelPrefab: {fileID: 1347178785580805900, guid: 1d89b97695d649546b26fc794aaa3ea5,
+    type: 3}
   windDirection: 0
 --- !u!1 &1816135688
 GameObject:

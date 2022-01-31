@@ -42,7 +42,7 @@
                     "initialStateCheck": false
                 },
                 {
-                    "name": "RotateBoard",
+                    "name": "Restart",
                     "type": "Button",
                     "id": "3473f86c-598c-4cd6-83b1-0483df25618d",
                     "expectedControlType": "Button",
@@ -290,7 +290,7 @@
                     "interactions": "",
                     "processors": "",
                     "groups": "Keyboard&Mouse",
-                    "action": "RotateBoard",
+                    "action": "Restart",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }

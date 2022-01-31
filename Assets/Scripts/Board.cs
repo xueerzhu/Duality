@@ -23,13 +23,13 @@ public class Board : MonoBehaviour
     public Vector3Int stonePosition;
     public List<Vector3Int> stonePositions;
     public List<Vector3Int> riverPositions;
-    public GameObject groundParent;
+    public GameObject levelPrefab;
     
     public Game.WindDir windDirection;
     
     private Dictionary<Vector3Int, Square> board = new Dictionary<Vector3Int, Square>();
     private Dictionary<Vector3Int, GameObject> groundTiles = new Dictionary<Vector3Int, GameObject>();
-
+    private GameObject currentLevelPrefab;
     void Start()
     {
         // ProcessBoard();
@@ -155,8 +155,14 @@ public class Board : MonoBehaviour
     }
     
     // todo: just to populate the data structure for now
-    void ProcessBoardPrefab()
+    public void ProcessBoardPrefab()
     {
+        if (currentLevelPrefab != null) Destroy(currentLevelPrefab);
+        groundTiles.Clear();
+        
+        // init prefab
+        currentLevelPrefab = Instantiate(levelPrefab);
+        
         // 0. dictionary
         int xHalf = (int) Math.Round(Decimal.ToDouble(startBoardSizeX) / 2);
         int zHalf = (int) Math.Round(Decimal.ToDouble(startBoardSizeZ) / 2);
@@ -207,7 +213,7 @@ public class Board : MonoBehaviour
         board[winPosition].AppendTile(Game.Tile.WIN);
         
         // construct ground tiles dict for flipping
-        foreach (Transform child in groundParent.transform)
+        foreach (Transform child in GameObject.FindGameObjectWithTag("Ground").transform)
         {
             groundTiles.Add(Vector3Int.FloorToInt(child.position), child.gameObject);
         }
@@ -227,33 +233,52 @@ public class Board : MonoBehaviour
     }
     
     // returns true if we flipped a win tile
-    public bool FlipGroundTileInternal(Vector3Int loc)
+    public IEnumerator FlipGroundTileInternal(Vector3Int loc)
     {
+        bool isWin = false;
         Tile gt = null;
         foreach (var t in board[loc].GetTiles())
         {
             if (t.name.ToString().Split("_")[0] == "GROUND")
             {
                 gt = t;
+                gt.Flip();
             }
 
             if (t.name == Game.Tile.WIN)
             {
-                groundTiles[loc].transform.eulerAngles += new Vector3(180 ,0, 0);
-                return true;
+                isWin = true;
+                StartCoroutine(FlipSquareCoroutine(groundTiles[loc], new Vector3(0, 180, 0)));
+                
             }
         }
-        int r = Random.Range(10, 30);
-        if (r % 2 == 0)
+
+        if (!isWin)
         {
-            groundTiles[loc].transform.eulerAngles += new Vector3(0 ,0, r);
-        }
-        else if  (r % 2 == 1)
-        {
-            groundTiles[loc].transform.eulerAngles += new Vector3(r, 0, 0);
+            int r = Random.Range(10, 30);
+            if (r % 2 == 0)
+            {
+                StartCoroutine(FlipSquareCoroutine(groundTiles[loc], new Vector3(0, 0, r)));
+            }
+            else if  (r % 2 == 1)
+            {
+                StartCoroutine(FlipSquareCoroutine(groundTiles[loc], new Vector3(r, 0, 0)));
+            }
         }
         
-        return false;
+        yield break;
+    }
+
+    private IEnumerator FlipSquareCoroutine(GameObject square, Vector3 endValue)
+    {
+        float time = 0f;
+        while (time < 0.75f)
+        {
+            square.transform.eulerAngles = Game.EaseOut(time / 0.75f) * endValue; 
+            time += Time.deltaTime;
+            yield return null;
+        }
+
     }
 
     private void getRiverTile(Vector3Int square, Game.WindDir wind, out Game.Tile river)
