@@ -646,12 +646,6 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 8
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!1 &537118710 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 6704980558099035806, guid: 1d89b97695d649546b26fc794aaa3ea5,
-    type: 3}
-  m_PrefabInstance: {fileID: 1534928161}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1 &610867267
 GameObject:
   m_ObjectHideFlags: 0
@@ -1269,39 +1263,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
-<<<<<<< HEAD
     - target: {fileID: 222775581253571704, guid: 1d89b97695d649546b26fc794aaa3ea5,
         type: 3}
       propertyPath: m_Materials.Array.data[2]
       value: 
       objectReference: {fileID: 2100000, guid: d3088e56382c47a458ef40fc13b60c8f, type: 2}
-=======
-    - target: {fileID: 562621824669216697, guid: 1d89b97695d649546b26fc794aaa3ea5,
-        type: 3}
-      propertyPath: m_LocalRotation.w
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 562621824669216697, guid: 1d89b97695d649546b26fc794aaa3ea5,
-        type: 3}
-      propertyPath: m_LocalRotation.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 562621824669216697, guid: 1d89b97695d649546b26fc794aaa3ea5,
-        type: 3}
-      propertyPath: m_LocalRotation.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 562621824669216697, guid: 1d89b97695d649546b26fc794aaa3ea5,
-        type: 3}
-      propertyPath: m_LocalRotation.z
-      value: -1
-      objectReference: {fileID: 0}
-    - target: {fileID: 562621824669216697, guid: 1d89b97695d649546b26fc794aaa3ea5,
-        type: 3}
-      propertyPath: m_LocalEulerAnglesHint.x
-      value: 0
-      objectReference: {fileID: 0}
->>>>>>> 0df1b1dcb3bbce0b0925eb6f84e0fa217d8e9180
     - target: {fileID: 1336375491651736215, guid: 1d89b97695d649546b26fc794aaa3ea5,
         type: 3}
       propertyPath: m_RootOrder
@@ -1426,7 +1392,7 @@ MonoBehaviour:
     ModeOverride: 2
     LensShift: {x: 0, y: 0}
     GateFit: 2
-    m_SensorSize: {x: 1.7774936, y: 1}
+    m_SensorSize: {x: 1.7775551, y: 1}
     Iso: 200
     ShutterSpeed: 0.005
     Aperture: 15.8
@@ -1520,22 +1486,10 @@ MonoBehaviour:
   - {fileID: 3719795686482475151, guid: 4f074c0d3e8513145ba063d65e580b26, type: 3}
   - {fileID: 2878520367286438786, guid: 29d8b922a688a2246bb4ff8c8746ddf4, type: 3}
   groundTileCount: 4
-  startBoardSizeX: 6
+  startBoardSizeX: 5
   startBoardSizeZ: 6
-  cloudPosition: {x: 2, y: 0, z: 3}
-  winPosition: {x: -2, y: 0, z: 2}
+  cloudPosition: {x: 2, y: 0, z: -3}
   stonePosition: {x: -1, y: 0, z: -1}
-  stonePositions:
-  - {x: -2, y: 0, z: 1}
-  - {x: -1, y: 0, z: -2}
-  riverPositions:
-  - {x: -3, y: 0, z: 3}
-  - {x: -2, y: 0, z: 3}
-  - {x: -1, y: 0, z: 3}
-  - {x: 0, y: 0, z: 3}
-  - {x: 1, y: 0, z: 3}
-  - {x: 2, y: 0, z: 3}
-  groundParent: {fileID: 537118710}
   windDirection: 0
 --- !u!1 &1816135688
 GameObject:
@@ -1769,8 +1723,7 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    m_RemovedComponents:
-    - {fileID: 3921071147144131427, guid: f2c6e7750093c854089faf537ad43c92, type: 3}
+    m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: f2c6e7750093c854089faf537ad43c92, type: 3}
 --- !u!1 &1906824502
 GameObject:
