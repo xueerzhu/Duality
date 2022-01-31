@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 2079.7666, g: 917.5923, b: 539.58325, a: 1}
+  m_IndirectSpecularColor: {r: 3362.6035, g: 1551.4727, b: 962.2959, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -1146,6 +1146,75 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1001 &1534928161
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 1336375491651736215, guid: 1d89b97695d649546b26fc794aaa3ea5,
+        type: 3}
+      propertyPath: m_RootOrder
+      value: 11
+      objectReference: {fileID: 0}
+    - target: {fileID: 1336375491651736215, guid: 1d89b97695d649546b26fc794aaa3ea5,
+        type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 6.566785
+      objectReference: {fileID: 0}
+    - target: {fileID: 1336375491651736215, guid: 1d89b97695d649546b26fc794aaa3ea5,
+        type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 6.001039
+      objectReference: {fileID: 0}
+    - target: {fileID: 1336375491651736215, guid: 1d89b97695d649546b26fc794aaa3ea5,
+        type: 3}
+      propertyPath: m_LocalPosition.z
+      value: -1.2189138
+      objectReference: {fileID: 0}
+    - target: {fileID: 1336375491651736215, guid: 1d89b97695d649546b26fc794aaa3ea5,
+        type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1336375491651736215, guid: 1d89b97695d649546b26fc794aaa3ea5,
+        type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1336375491651736215, guid: 1d89b97695d649546b26fc794aaa3ea5,
+        type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1336375491651736215, guid: 1d89b97695d649546b26fc794aaa3ea5,
+        type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1336375491651736215, guid: 1d89b97695d649546b26fc794aaa3ea5,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1336375491651736215, guid: 1d89b97695d649546b26fc794aaa3ea5,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1336375491651736215, guid: 1d89b97695d649546b26fc794aaa3ea5,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1347178785580805900, guid: 1d89b97695d649546b26fc794aaa3ea5,
+        type: 3}
+      propertyPath: m_Name
+      value: DemoLevel
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 1d89b97695d649546b26fc794aaa3ea5, type: 3}
 --- !u!1 &1545202038
 GameObject:
   m_ObjectHideFlags: 0
@@ -1208,7 +1277,7 @@ MonoBehaviour:
     ModeOverride: 2
     LensShift: {x: 0, y: 0}
     GateFit: 2
-    m_SensorSize: {x: 1.7764901, y: 1}
+    m_SensorSize: {x: 1.7775551, y: 1}
     Iso: 200
     ShutterSpeed: 0.005
     Aperture: 15.8
