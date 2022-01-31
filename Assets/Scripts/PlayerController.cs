@@ -15,7 +15,6 @@ public class PlayerController : MonoBehaviour
     
     private float movementX;
     private float movementZ;
-    private Vector3Int cachePlayerMovingTo;
     
     private Animator _animator;
     private bool isMoving;
@@ -116,8 +115,6 @@ public class PlayerController : MonoBehaviour
             main.FlipGroundTile(Vector3Int.FloorToInt(startPos));
             
             // lerp position
-            cachePlayerMovingTo = Vector3Int.FloorToInt(playerTransform.position + movement);
-
             while (time < 0.75f)
             {
                
@@ -132,7 +129,6 @@ public class PlayerController : MonoBehaviour
                 _animator.SetTrigger("TriggerLower");
                 anim_isLifted = false;
             }
-
             isMoving = false;
         }
     }
@@ -148,7 +144,6 @@ public class PlayerController : MonoBehaviour
         {
             canMoveToSquare = canMoveToSquare && CanMoveToTile(tile);
         }
-
         return canMoveToSquare;
     }
     

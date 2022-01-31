@@ -46,7 +46,10 @@ public class Main : MonoBehaviour
 
     public void FlipGroundTile(Vector3Int tileLoc)
     {
-        board.FlipGroundTileInternal(tileLoc);
+        if (board.FlipGroundTileInternal(tileLoc))  // if is win tile
+        {
+            // TODO
+        }
     }
 
     // INPUTS

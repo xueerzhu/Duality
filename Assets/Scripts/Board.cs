@@ -19,7 +19,12 @@ public class Board : MonoBehaviour
     public int startBoardSizeX;
     public int startBoardSizeZ;
     public Vector3Int cloudPosition;
+    public Vector3Int winPosition;
     public Vector3Int stonePosition;
+    public List<Vector3Int> stonePositions;
+    public List<Vector3Int> riverPositions;
+    public GameObject groundParent;
+    
     public Game.WindDir windDirection;
     
     private Dictionary<Vector3Int, Square> board = new Dictionary<Vector3Int, Square>();
@@ -27,8 +32,10 @@ public class Board : MonoBehaviour
 
     void Start()
     {
-        ProcessBoard();
-        RefreshBoard();
+        // ProcessBoard();
+        // RefreshBoard();
+
+        ProcessBoardPrefab();
     }
     
     // Process board data using Rules:
@@ -146,6 +153,65 @@ public class Board : MonoBehaviour
             }
         }
     }
+    
+    // todo: just to populate the data structure for now
+    void ProcessBoardPrefab()
+    {
+        // 0. dictionary
+        int xHalf = (int) Math.Round(Decimal.ToDouble(startBoardSizeX) / 2);
+        int zHalf = (int) Math.Round(Decimal.ToDouble(startBoardSizeZ) / 2);
+        
+        for (int x = -3; x <= 2; x++)
+        {
+            for (int z = -2; z <= 3; z++)
+            {
+                Vector3Int loc = new Vector3Int(x, 0, z);
+                if (!board.ContainsKey(loc))
+                    board[loc] = new Square();
+            }
+        }
+        
+        // fill with ground tiles
+        foreach (var loc in board.Keys)
+        {
+            int groundID = Random.Range(1, groundTileCount + 1);
+            switch (groundID)
+            {
+                case 1:
+                    board[loc].AppendTile(Game.Tile.GROUND_1);
+                    break;
+                case 2:
+                    board[loc].AppendTile(Game.Tile.GROUND_2);
+                    break;
+                case 3:
+                    board[loc].AppendTile(Game.Tile.GROUND_3);
+                    break;
+                case 4:
+                    board[loc].AppendTile(Game.Tile.GROUND_4);
+                    break;
+            }
+        }
+        // add cloud, river, stone
+        board[cloudPosition].AppendTile(Game.Tile.CLOUD);
+        foreach (var stone in stonePositions)
+        {
+            board[stone].AppendTile(Game.Tile.STONE);
+        }
+
+        foreach (var river in riverPositions)
+        {
+            board[river].AppendTile(Game.Tile.RIVER_EG_NX);
+        }
+        
+        // add win tile walnut
+        board[winPosition].AppendTile(Game.Tile.WIN);
+        
+        // construct ground tiles dict for flipping
+        foreach (Transform child in groundParent.transform)
+        {
+            groundTiles.Add(Vector3Int.FloorToInt(child.position), child.gameObject);
+        }
+    }
 
     public Square GetSquareInternal(Vector3Int squareLocation)
     {
@@ -159,8 +225,9 @@ public class Board : MonoBehaviour
             return null;
         }
     }
-
-    public void FlipGroundTileInternal(Vector3Int loc)
+    
+    // returns true if we flipped a win tile
+    public bool FlipGroundTileInternal(Vector3Int loc)
     {
         Tile gt = null;
         foreach (var t in board[loc].GetTiles())
@@ -169,8 +236,13 @@ public class Board : MonoBehaviour
             {
                 gt = t;
             }
-        }
 
+            if (t.name == Game.Tile.WIN)
+            {
+                groundTiles[loc].transform.eulerAngles += new Vector3(180 ,0, 0);
+                return true;
+            }
+        }
         int r = Random.Range(10, 30);
         if (r % 2 == 0)
         {
@@ -180,9 +252,8 @@ public class Board : MonoBehaviour
         {
             groundTiles[loc].transform.eulerAngles += new Vector3(r, 0, 0);
         }
-    
-        if(gt != null) gt.Flip();
-
+        
+        return false;
     }
 
     private void getRiverTile(Vector3Int square, Game.WindDir wind, out Game.Tile river)
@@ -251,10 +322,12 @@ public class Tile
     {
         name = tileName;
     }
-    public void Flip()
+    
+    // returns true if it is the win tile
+    public bool Flip()
     {
         isFlipped = true;  // ground tiles can only be flipped once, not two way design
+        return name == Game.Tile.WIN;
     }
-    
 }
 
